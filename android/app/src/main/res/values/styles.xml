@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Theme applied to the Android Window as soon as the process has started.
+         This theme determines the window background before the Flutter UI is rendered. -->
+    <style name="LaunchTheme" parent="android:Theme.Black.NoTitleBar">
+        <!-- Show a black background in the launch theme. -->
+        <item name="android:windowBackground">@drawable/launch_background</item>
+    </style>
+    <!-- Theme applied to the Android Window as soon as the Flutter UI has rendered.
+         This theme determines the window background behind the Flutter UI. -->
+    <style name="NormalTheme" parent="android:Theme.Black.NoTitleBar">
+        <item name="android:windowBackground">?android:colorBackground</item>
+    </style>
+</resources>
