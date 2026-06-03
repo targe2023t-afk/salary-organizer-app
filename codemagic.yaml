@@ -14,14 +14,14 @@ workflows:
       - name: Set JDK to 17
         script: |
           echo "Setting up JDK 17"
-          sdkman_init=$(sdk list java | grep -E "17.*-open" | head -n 1 | awk '{print $NF}')
-          sdk install java 17.0.7-open || true
-          sdk use java 17.0.7-open
+          sdk use java 17.0.7-open || true
       - name: Get Flutter packages
         script: |
+          cd salary_organizer_mobile
           flutter packages pub get
       - name: Build Android APK
         script: |
+          cd salary_organizer_mobile
           flutter build apk --release --no-sound-null-safety
     artifacts:
-      - build/app/outputs/flutter-apk/*.apk
+      - salary_organizer_mobile/build/app/outputs/flutter-apk/*.apk
