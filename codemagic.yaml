@@ -1,4 +1,3 @@
-```yaml
 workflows:
   android-workflow:
     name: Android APK Build
@@ -6,17 +5,23 @@ workflows:
     instance_type: mac_mini_m1
     environment:
       flutter: stable
-      xcode: latest
-      cocoapods: default
+      groups:
+        - java17
     triggering:
       events:
         - push
     scripts:
+      - name: Set JDK to 17
+        script: |
+          echo "Setting up JDK 17"
+          sdkman_init=$(sdk list java | grep -E "17.*-open" | head -n 1 | awk '{print $NF}')
+          sdk install java 17.0.7-open || true
+          sdk use java 17.0.7-open
       - name: Get Flutter packages
-        script: | 
+        script: |
           flutter packages pub get
       - name: Build Android APK
-        script: | 
+        script: |
           flutter build apk --release --no-sound-null-safety
     artifacts:
       - build/app/outputs/flutter-apk/*.apk
